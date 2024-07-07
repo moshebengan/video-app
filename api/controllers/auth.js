@@ -20,6 +20,7 @@ export const signup = async (req, res, next) => {
 };
 
 export const signin = async (req, res, next) => {
+  const isProduction = process.env.NODE_ENV === 'production';
   try {
     const user = await User.findOne({ name: req.body.name });
     if (!user) return next(createError(404, "User not found"));
@@ -30,11 +31,13 @@ export const signin = async (req, res, next) => {
 
     const token = jwt.sign({ id: user._id }, process.env.JWT);
 
+
     const { password, ...others } = user._doc;
 
     res
       .cookie("access_token", token, {
         httpOnly: true,
+        secrure: isProduction,
       })
       .status(200)
       .json(others);

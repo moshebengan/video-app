@@ -20,7 +20,7 @@ export const signup = async (req, res, next) => {
 };
 
 export const signin = async (req, res, next) => {
-  const isProduction = process.env.NODE_ENV === 'production';
+  // const isProduction = process.env.NODE_ENV === 'production';
   try {
     const user = await User.findOne({ name: req.body.name });
     if (!user) return next(createError(404, "User not found"));
@@ -38,6 +38,7 @@ export const signin = async (req, res, next) => {
       .cookie("access_token", token, {
         httpOnly: true,
         secure: true,
+        maxAge: 72 * 60 * 60 * 1000
       })
       .status(200)
       .json(others);

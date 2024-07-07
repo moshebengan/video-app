@@ -72,7 +72,7 @@ const Homepage = ({ type }) => {
       }
     };
     fetchVideo();
-  }, [type, reload, currentUser.savedVideos]);
+  }, [type, reload, currentUser?.savedVideos]);
 
   return (
     <Container>

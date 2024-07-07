@@ -80,6 +80,8 @@ const Link = styled.span`
 
 const Login = () => {
 
+  axios.defaults.withCredentials = true;
+
   const {currentUser} = useSelector(state => state.user)
 
   const [name, setName] = useState('');

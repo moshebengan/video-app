@@ -49,7 +49,7 @@ const Homepage = ({ type }) => {
           case "random":
           case "trend":
           case "sub":
-            response = await axios.get(`/videos/${type}`);
+            response = await axios.get(`${process.env.REACT_APP_API_URL}/videos/${type}`);
             setVideos(response.data);
             break;
           case "music":
@@ -57,7 +57,7 @@ const Homepage = ({ type }) => {
           case "movies":
           case "gaming":
           case "live":
-            response = await axios.get(`/videos/tags?tags=${type}`);
+            response = await axios.get(`${process.env.REACT_APP_API_URL}/videos/tags?tags=${type}`);
             setVideos(response.data);
             break;
           case "library":

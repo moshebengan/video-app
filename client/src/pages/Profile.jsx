@@ -302,7 +302,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const res = await axios.get(`/videos/${currentUser?._id}`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/videos/${currentUser?._id}`);
         setVideos(res.data);
       } catch (err) {
         console.log(err);
@@ -331,7 +331,7 @@ const Profile = () => {
     setOpenModal(false);
     navigate("/");
     try {
-      await axios.delete(`/users/${currentUser._id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/users/${currentUser._id}`);
       dispatch(logout());
     } catch (err) {
       console.log(err);

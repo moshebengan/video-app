@@ -160,7 +160,7 @@ const SavedVideoCard = ({ videoId, library }) => {
   useEffect(() => {
     const fetchVideo = async () => {
       try {
-        const res = await axios.get(`/videos/find/${videoId}`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/videos/find/${videoId}`);
         setVideo(res.data);
       } catch (err) {
         console.log(err);
@@ -172,7 +172,7 @@ const SavedVideoCard = ({ videoId, library }) => {
   useEffect(() => {
     const fetchChannel = async () => {
       try {
-        const res = await axios.get(`/users/find/${video.userId}`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/users/find/${video.userId}`);
         setChannel(res.data);
       } catch (err) {
         console.log(err);

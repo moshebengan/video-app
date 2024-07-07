@@ -65,7 +65,7 @@ const Wrapper = styled.div`
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
-  console.log(process.env.NODE_ENV)
+  // console.log(process.env.NODE_ENV)
   // const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // const toggleSidebar = () => {

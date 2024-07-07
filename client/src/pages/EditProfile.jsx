@@ -153,7 +153,7 @@ const EditProfile = ({setOpenEdit}) => {
       const handleUpload = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.put(`/users/${currentUser._id}`, inputs )
+            const res = await axios.put(`${process.env.REACT_APP_API_URL}/users/${currentUser._id}`, inputs )
             dispatch(loginSuccess(res.data))
             setOpenEdit(false)
             res.status === 200 && navigate('/profile');

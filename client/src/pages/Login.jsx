@@ -100,7 +100,7 @@ const Login = () => {
     e.preventDefault()
     dispatch(loginStart());
     try {
-      const res = await axios.post("/auth/signin", {name, password})
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/signin`, {name, password})
       dispatch(loginSuccess(res.data))
       navigate('/');
     } catch (err) {
@@ -112,7 +112,7 @@ const Login = () => {
   const signInWithGoogle = async () => {
     dispatch(loginStart())
     signInWithPopup(auth, provider).then((result) => {
-      axios.post("/auth/google", {
+      axios.post(`${process.env.REACT_APP_API_URL}/auth/google`, {
         name: result.user.displayName,
         email: result.user.email,
         img: result.user.photoURL,
@@ -128,7 +128,7 @@ const Login = () => {
     e.preventDefault()
     const img = 'https://www.pngmart.com/files/21/Account-Avatar-Profile-PNG-Pic.png';
     try {
-      const res = await axios.post("/auth/signup", {name, email, password, img})
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, {name, email, password, img})
       console.log(res.data)
     } catch (err) {
       

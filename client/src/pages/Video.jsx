@@ -237,11 +237,11 @@ const Video = () => {
     const fetchData = async () => {
       try {
         dispatch(fetchStart());
-        await axios.put(`/videos/views/${path}`);
-        const videoRes = await axios.get(`/videos/find/${path}`);
+        await axios.put(`${process.env.REACT_APP_API_URL}/videos/views/${path}`);
+        const videoRes = await axios.get(`${process.env.REACT_APP_API_URL}/videos/find/${path}`);
 
         const channelRes = await axios.get(
-          `/users/find/${videoRes.data.userId}`
+          `${process.env.REACT_APP_API_URL}/users/find/${videoRes.data.userId}`
         );
 
         setChannel(channelRes.data);
@@ -256,24 +256,24 @@ const Video = () => {
   }, [path, dispatch, openEdit]);
 
   const handleLike = async () => {
-    await axios.put(`/users/like/${currentVideo._id}`);
+    await axios.put(`${process.env.REACT_APP_API_URL}/users/like/${currentVideo._id}`);
     dispatch(like(currentUser._id));
   };
 
   const handleDislike = async () => {
-    await axios.put(`/users/dislike/${currentVideo._id}`);
+    await axios.put(`${process.env.REACT_APP_API_URL}/users/dislike/${currentVideo._id}`);
     dispatch(dislike(currentUser._id));
   };
 
   const handleSubscribe = async () => {
     currentUser.subscribedUsers.includes(channel._id)
-      ? await axios.put(`/users/unsub/${channel._id}`)
-      : await axios.put(`/users/sub/${channel._id}`);
+      ? await axios.put(`${process.env.REACT_APP_API_URL}/users/unsub/${channel._id}`)
+      : await axios.put(`${process.env.REACT_APP_API_URL}/users/sub/${channel._id}`);
     dispatch(subscription(channel._id));
   };
 
   const handleSave = async () => {
-    await axios.put(`/users/saveVideo/${currentVideo._id}`);
+    await axios.put(`${process.env.REACT_APP_API_URL}/users/saveVideo/${currentVideo._id}`);
     dispatch(saveVideo(currentVideo._id));
   };
 
@@ -281,7 +281,7 @@ const Video = () => {
     setOpenModal(false);
     navigate("/");
     try {
-      axios.delete(`/videos/${currentVideo._id}`);
+      axios.delete(`${process.env.REACT_APP_API_URL}/videos/${currentVideo._id}`);
       dispatch(setVideo());
     } catch (error) {
       console.log(error);

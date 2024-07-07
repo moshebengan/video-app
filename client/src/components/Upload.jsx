@@ -158,11 +158,11 @@ const Upload = ({ setOpen, edit }) => {
     let res;
     try {
       edit
-        ? (res = await axios.put(`/videos/${currentVideo._id}`, {
+        ? (res = await axios.put(`${process.env.REACT_APP_API_URL}/videos/${currentVideo._id}`, {
             ...inputs,
             tags,
           }))
-        : (res = await axios.post("/videos", { ...inputs, tags }));
+        : (res = await axios.post(`${process.env.REACT_APP_API_URL}/videos`, { ...inputs, tags }));
 
       setOpen(false);
       res.status === 200 && navigate(`/video/${res.data._id}`);

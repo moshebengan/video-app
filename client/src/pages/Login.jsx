@@ -87,6 +87,7 @@ const Login = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [succSignup, setSuccSignup] = useState(false)
  
   const dispatch = useDispatch()
   const navigate = useNavigate();
@@ -130,10 +131,16 @@ const Login = () => {
     e.preventDefault()
     const img = 'https://www.pngmart.com/files/21/Account-Avatar-Profile-PNG-Pic.png';
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, {name, email, password, img})
-      console.log(res.data)
+      await axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, {name, email, password, img})
+      setName('');
+      setEmail('');
+      setPassword('')
+      setSuccSignup(true)
+      setTimeout(() => {
+        setSuccSignup(false);
+      }, [3000])
     } catch (err) {
-      
+      console.log(err)
     }
   }
 
@@ -149,10 +156,11 @@ const Login = () => {
         <Title>or</Title>
         <Button onClick={signInWithGoogle}>Sign in with Google</Button>
         <Title>or</Title>
-        <Input type="text" placeholder="username"  onChange={e => setName(e.target.value)}  />
-        <Input type="email" placeholder="email"  onChange={e => setEmail(e.target.value)} />
-        <Input type="password" placeholder="password" onChange={e => setPassword(e.target.value)}/>
+        <Input type="text" placeholder="username" value={name}  onChange={e => setName(e.target.value)}  />
+        <Input type="email" placeholder="email" value={email}  onChange={e => setEmail(e.target.value)} />
+        <Input type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)}/>
         <Button onClick={handleSignUp}>Sign up</Button>
+        {succSignup && <SubTitle>You signed up successfully, Enter your credentials on the login form above.</SubTitle>}
       </Wrapper>
       <More>
         English(USA)
